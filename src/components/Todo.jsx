@@ -1,6 +1,8 @@
+import { Trash2 } from "lucide-react";
+
 export const Todo = ({ todo, setTodos }) => {
   return (
-    <li className="px-4 py-2 border rounded-md bg-gray-200 flex justify-between items-center">
+    <li className="flex items-center justify-between px-4 py-2 bg-gray-200 border rounded-md">
       <span>{todo.name}</span>
 
       <div className="flex gap-2">
@@ -14,10 +16,12 @@ export const Todo = ({ todo, setTodos }) => {
                     done: !currentTodo.done,
                   };
                 }
+
+                return currentTodo;
               })
             );
           }}
-          className="text-white bg-green-500 px-2 py-1 rounded-md hover:bg-green-400 transition-colors duration-150"
+          className="px-2 py-1 text-white transition-colors duration-150 bg-green-500 rounded-md hover:bg-green-400"
         >
           Marqué comme {todo.done ? "non fait" : "fait"}
         </button>
@@ -27,9 +31,9 @@ export const Todo = ({ todo, setTodos }) => {
               previousTodos.filter((prev) => todo.id !== prev.id)
             );
           }}
-          className="text-white bg-red-500 px-2 py-1 rounded-md hover:bg-red-400 transition-colors duration-150"
+          className="px-2 py-1 text-white transition-colors duration-150 bg-red-500 rounded-md hover:bg-red-400"
         >
-          Supprimer
+          <Trash2 />
         </button>
       </div>
     </li>
