@@ -1,28 +1,32 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Todo } from "./components/Todo";
 import { nanoid } from "nanoid";
 import { Plus } from "lucide-react";
+import { TodoContext } from "./providers/TodoProvider";
+import { useWindowResize } from "./hooks/useWindowResize";
+import TodoContainer from "./components/TodosContainer";
 
 const App = () => {
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      name: "Faire les courses",
-      done: true,
-    },
-    {
-      id: 2,
-      name: "Faire le ménage",
-      done: false,
-    },
-    {
-      id: 3,
-      name: "Faire du sport",
-      done: false,
-    },
-  ]);
-
+  const [posts, setPosts] = useState([]);
   const [value, setValue] = useState("");
+
+  const { todos, setTodos } = useContext(TodoContext);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await fetch("https://jsonplaceholder.org/posts");
+      const data = await response.json();
+      setPosts(data);
+    };
+
+    fetchPosts();
+  }, []);
+
+  const { width, height } = useWindowResize();
+
+  console.log(width, height);
+
+  console.log(posts);
 
   return (
     <div className="flex flex-col items-center justify-center gap-8">
@@ -33,11 +37,11 @@ const App = () => {
           Vous n&apos;avez pas ajouté de todo !
         </span>
       ) : (
-        <ul className="flex flex-col gap-2 w-[90%] lg:w-1/3">
+        <TodoContainer>
           {todos.map((todo, index) => (
             <Todo key={index} todo={todo} setTodos={setTodos} />
           ))}
-        </ul>
+        </TodoContainer>
       )}
 
       <div className="flex gap-2 w-[90%] lg:w-1/3">

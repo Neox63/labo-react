@@ -1,9 +1,13 @@
 import { Trash2 } from "lucide-react";
+import { useContext } from "react";
+import { TodoContext } from "../providers/TodoProvider";
 
-export const Todo = ({ todo, setTodos }) => {
+export const Todo = ({ todo }) => {
+  const { setTodos } = useContext(TodoContext);
+
   return (
     <li className="flex items-center justify-between px-4 py-2 bg-gray-200 border rounded-md">
-      <span>{todo.name}</span>
+      <span className={`${todo.done ? "line-through" : ""}`}>{todo.name}</span>
 
       <div className="flex gap-2">
         <button

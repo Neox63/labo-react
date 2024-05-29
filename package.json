@@ -10,10 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "framer-motion": "^11.2.9",
     "lucide-react": "^0.379.0",
     "nanoid": "^5.0.7",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-sortable-hoc": "^2.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
